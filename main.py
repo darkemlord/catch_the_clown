@@ -56,13 +56,24 @@ continue_text = font.render("Click anywhere and play again ", True, YELLOW)
 continue_rect = continue_text.get_rect()
 continue_rect.center = (WINDOW_WIDTH // 2, WINDOW_HEIGHT // 2 + 64)
 
+# Set sound music
+
+click_sound = pg.mixer.Sound("./assets/click_sound.wav")
+miss_sound = pg.mixer.Sound("./assets/miss_sound.wav")
+pg.mixer.music.load("./assets/ctc_background_music.wav")
+
 # Characters Images
+background_image = pg.image.load("./assets/background.png")
+background_rect = background_image.get_rect()
+background_rect.topleft = (0, 0)
+
 clown_image = pg.image.load("./assets/clown.png")
 clown_rect = clown_image.get_rect()
 clown_rect.center = (WINDOW_WIDTH // 2, WINDOW_HEIGHT // 2)
 
 
 # Main Game loop
+pg.mixer.music.play(-1, 0.0)
 running = True
 
 while running:
@@ -70,8 +81,8 @@ while running:
         if event.type == pg.QUIT:
             running = False
 
-    # Fill surface and remove duplicated images
-    display_surface.fill(BLACK)
+    # Fill surface and remove duplicated images background
+    display_surface.blit(background_image, background_rect)
 
     # Display Text
     display_surface.blit(title_text, title_rect)
