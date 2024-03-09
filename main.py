@@ -1,11 +1,12 @@
 import pygame as pg
+import random
 
 # Initialize hame
 pg.init()
 
 # Display surface
-WINDOW_HEIGHT = 500
-WINDOW_WIDTH = 500
+WINDOW_HEIGHT = 945
+WINDOW_WIDTH = 600
 display_surface = pg.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 
 # Game speed
@@ -14,8 +15,20 @@ clock = pg.time.Clock()
 
 # Load Game values
 
+PLAYER_STARTING_LIVES = 5
+CLOWN_STARTING_VELOCITY = 5
+CLOWN_ACCELERATION = 1
+
+score = 0
+player_lives = PLAYER_STARTING_LIVES
+clown_velocity = CLOWN_STARTING_VELOCITY
+clown_dx = random.choice([-1, 1])
+clown_dy = random.choice([-1, 1])
+
 # Set Colors
 BLACK = (0, 0, 0)
+BLUE = (1, 175, 209)
+YELLOW = (248, 231, 28)
 # Set text and fonts
 
 # Characters Images
