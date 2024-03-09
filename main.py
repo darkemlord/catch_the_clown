@@ -48,10 +48,19 @@ lives_text = font.render("Lives: " + str(player_lives), True, YELLOW)
 lives_rect = lives_text.get_rect()
 lives_rect.topright = (WINDOW_WIDTH - 50, 50)
 
+game_over_text = font.render("Game Over", True, YELLOW)
+game_over_rect = game_over_text.get_rect()
+game_over_rect.center = (WINDOW_WIDTH // 2, WINDOW_HEIGHT // 2)
+
+continue_text = font.render("Click anywhere and play again ", True, YELLOW)
+continue_rect = continue_text.get_rect()
+continue_rect.center = (WINDOW_WIDTH // 2, WINDOW_HEIGHT // 2 + 64)
+
 # Characters Images
 clown_image = pg.image.load("./assets/clown.png")
 clown_rect = clown_image.get_rect()
 clown_rect.center = (WINDOW_WIDTH // 2, WINDOW_HEIGHT // 2)
+
 
 # Main Game loop
 running = True
