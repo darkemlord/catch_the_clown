@@ -5,9 +5,10 @@ import random
 pg.init()
 
 # Display surface
-WINDOW_HEIGHT = 945
-WINDOW_WIDTH = 600
+WINDOW_WIDTH = 945
+WINDOW_HEIGHT = 600
 display_surface = pg.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
+pg.display.set_caption("Catch the Clown")
 
 # Game speed
 FPS = 60
@@ -29,7 +30,23 @@ clown_dy = random.choice([-1, 1])
 BLACK = (0, 0, 0)
 BLUE = (1, 175, 209)
 YELLOW = (248, 231, 28)
-# Set text and fonts
+
+# Set fonts
+font = pg.font.Font("./assets/Franxurter.ttf")
+
+# Set text
+
+title_text = font.render("Catch the Clown", True, BLUE)
+title_rect = title_text.get_rect()
+title_rect.topleft = (50, 10)
+
+score_text = font.render("Score: " + str(score), True, YELLOW)
+score_rect = score_text.get_rect()
+score_rect.topright = (WINDOW_WIDTH - 50, 10)
+
+lives_text = font.render("Lives: " + str(player_lives), True, YELLOW)
+lives_rect = lives_text.get_rect()
+lives_rect.topright = (WINDOW_WIDTH - 50, 50)
 
 # Characters Images
 clown_image = pg.image.load("./assets/clown.png")
@@ -47,6 +64,10 @@ while running:
     # Fill surface and remove duplicated images
     display_surface.fill(BLACK)
 
+    # Display Text
+    display_surface.blit(title_text, title_rect)
+    display_surface.blit(score_text, score_rect)
+    display_surface.blit(lives_text, lives_rect)
     # Display characters
     display_surface.blit(clown_image, clown_rect)
     # Update display
