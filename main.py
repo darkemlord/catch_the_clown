@@ -138,6 +138,7 @@ while running:
                     clown_dy = random.choice([-1, 1])
 
                     pg.mixer.music.play(-1, 0.0)
+                    is_paused = False
                 if event.type == pg.QUIT:
                     is_paused = False
                     running = False
