@@ -81,6 +81,40 @@ while running:
         if event.type == pg.QUIT:
             running = False
 
+    # Check if the click was made
+    if event.type == pg.MOUSEBUTTONDOWN:
+        mouse_x = event.pos[0]
+        mouse_y = event.pos[1]
+
+        # The clown was clicked
+        if clown_rect.collidepoint(mouse_x, mouse_y):
+            click_sound.play()
+            clown_velocity += CLOWN_ACCELERATION
+            # Move the clown in a new direction
+            previous_dx = clown_dx
+            previous_dy = clown_dy
+            while previous_dx == clown_dx and previous_dy == clown_dy:
+                clown_dx = random.choice([-1, 1])
+                clown_dy = random.choice([-1, 1])
+        # We missed the clown
+        else:
+            miss_sound.play()
+            player_lives -= 1
+
+    # Move the clown
+    clown_rect.x += clown_dx * clown_velocity
+    clown_rect.y += clown_dy * clown_velocity
+
+    # Bounce the clown off edges of the display
+
+    if clown_rect.left <= 0 or clown_rect.right >= WINDOW_WIDTH:
+        clown_dx = -1 * clown_dx
+    if clown_rect.top <= 0 or clown_rect.bottom >= WINDOW_HEIGHT:
+        clown_dy = -1 * clown_dy
+
+    # Update HUD
+    score_text = font.render("Score: " + str(score), True, YELLOW)
+    lives_text = font.render("Lives: " + str(lives_text), True, YELLOW)
     # Fill surface and remove duplicated images background
     display_surface.blit(background_image, background_rect)
 
@@ -92,6 +126,6 @@ while running:
     display_surface.blit(clown_image, clown_rect)
     # Update display
     pg.display.update()
-
+    clock.tick(FPS)
 
 pg.quit()
